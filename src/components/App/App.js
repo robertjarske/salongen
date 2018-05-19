@@ -1,18 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import LandingPage from "../../views/LandingPage";
 
-import "./App.css";
-
-class App extends Component {
+class App extends React.Component {
+  constructor({ styles, ...props }) {
+    super(...props);
+    this.styles = styles;
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Switch>
+        <Route exact path="/" component={LandingPage} />
+        <Route path="*" component={LandingPage} />
+      </Switch>
     );
   }
 }
