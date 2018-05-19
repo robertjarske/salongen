@@ -7,8 +7,8 @@ import Root from "./Root";
 import "./index.css";
 
 WebFont.load({
-  google: {
-    families: ["Montserrat:300,400,500,600,700"]
+  typekit: {
+    families: ["MillerBanner:300,400,500,600,700"]
   }
 });
 
