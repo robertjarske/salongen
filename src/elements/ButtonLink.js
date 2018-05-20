@@ -16,7 +16,7 @@ const ButtonLink = ({
   />
 );
 
-export default withStyles(({ themes, text }) => {
+export default withStyles(({ themes }) => {
   return {
     buttonLink: {
       border: "none",
