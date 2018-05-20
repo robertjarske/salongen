@@ -15,7 +15,7 @@ const LandingPage = ({ styles, ...props }) => {
   );
 };
 
-export default withStyles(({ colors, gradients }) => {
+export default withStyles(() => {
   return {
     background: {
       display: "flex",
