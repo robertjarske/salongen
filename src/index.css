@@ -1,9 +1,4 @@
 @import "./assets/reset.css";
-:root {
-  —space: 1.5em 0;
-  —space: 2em 0;
-}
-
 body {
   font-family: "MillerBanner", serif;
   font-size: 1.4rem;
@@ -14,40 +9,62 @@ body {
 
 h1 {
   font-size: 3.8rem;
-  /* 38px */
   line-height: 1;
   font-weight: 700;
-  margin-bottom: 3.8rem;
 }
 
 h2 {
   font-size: 2.4rem;
-  /* 24px */
   line-height: 1.2;
   font-weight: 600;
-  margin-bottom: 1.6rem;
 }
 
 h3 {
   font-size: 1.8rem;
-  /* 18px */
   line-height: 1.2;
   font-weight: 500;
-  margin-bottom: 1.4rem;
 }
 
 h4 {
   font-size: 1.6rem;
-  /* 16px */
   line-height: 1.2;
   font-weight: 500;
-  margin-bottom: 0.8rem;
 }
 
 h5 {
   font-size: 1.4rem;
-  /* 14px */
   font-weight: 500;
-  line-height: 1.2;
-  margin-bottom: 0.8rem;
+}
+
+@keyframes slideDownRange {
+  0% {
+    height: 0px;
+    min-height: 0px;
+  }
+  100% {
+    height: 70px;
+    min-height: 70px;
+  }
+}
+
+@keyframes slideDownFilter {
+  0% {
+    height: 0px;
+    min-height: 0px;
+  }
+  100% {
+    height: 70px;
+    min-height: 70px;
+  }
+}
+
+@keyframes slideInPrice {
+  0% {
+    color: #FFF;
+    font-size: 0px;
+  }
+  100% {
+    font-size: 100%;
+    color: #000;
+  }
 }
