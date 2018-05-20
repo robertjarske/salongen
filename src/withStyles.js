@@ -53,6 +53,21 @@ ThemedStyleSheet.registerTheme({
         background: THEME.COLOR_DANGER_HIGHLIGHT
       }
     }
+  },
+
+  text: {
+    xs: {
+      fontSize: "10px"
+    },
+    small: {
+      fontSize: "14px"
+    },
+    medium: {
+      fontSize: "16px"
+    },
+    large: {
+      fontSize: "24px"
+    }
   }
 });
 ThemedStyleSheet.registerInterface(aphroditeInterface);
