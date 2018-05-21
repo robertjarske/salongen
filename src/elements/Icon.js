@@ -7,7 +7,10 @@ import {
   faQuestion,
   faStar
 } from "@fortawesome/fontawesome-free-solid";
-import { faStar as farStar } from "@fortawesome/fontawesome-free-regular";
+import {
+  faStar as farStar,
+  faHeart
+} from "@fortawesome/fontawesome-free-regular";
 
 const Icon = ({
   icon = null,
@@ -30,6 +33,9 @@ const Icon = ({
       break;
     case "farStar":
       faIcon = farStar;
+      break;
+    case "faHeart":
+      faIcon = faHeart;
       break;
     default:
       faIcon = faQuestion;
@@ -68,6 +74,7 @@ export default withStyles(({ colors, text }) => {
     small: text.small,
     medium: text.medium,
     large: text.large,
+    xl: text.xl,
     /* Color */
     gold: { color: "#B69F58" },
     white: { color: "#FFF" },
