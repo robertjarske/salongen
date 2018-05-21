@@ -67,6 +67,9 @@ ThemedStyleSheet.registerTheme({
     },
     large: {
       fontSize: "24px"
+    },
+    xl: {
+      fontSize: "36px"
     }
   }
 });
