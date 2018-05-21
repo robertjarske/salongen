@@ -1,5 +1,8 @@
 import React from "react";
 import { withStyles, css } from "../withStyles";
+import { Route, Redirect } from "react-router-dom";
+
+// import Studio from "./Studio";
 import Header from "../components/Header/Header";
 import Filter from "../components/Filter/Filter";
 import Card from "../components/Card/Card";
@@ -17,7 +20,8 @@ class List extends React.Component {
       filterValues: {
         min: 100,
         max: 1000
-      }
+      },
+      redirect: false
     };
 
     this.handleFilter = this.handleFilter.bind(this);
@@ -40,7 +44,18 @@ class List extends React.Component {
     });
   }
 
+  handleClick(e, studio) {
+    this.props.handleChosenStudio(studio);
+    this.setState({
+      ...this.state,
+      redirect: true
+    });
+  }
+
   render() {
+    if (this.state.redirect) {
+      return <Redirect push to="/studio" />;
+    }
     return (
       <div>
         <Header
@@ -81,8 +96,8 @@ class List extends React.Component {
                   </div>
                   <div {...css(this.styles.iconContainer)}>
                     <i
+                      onClick={e => this.handleClick(e, studio)}
                       {...css(this.styles.arrow, this.styles.right)}
-                      onClick={() => console.log("clicked")}
                     />
                   </div>
                 </div>
