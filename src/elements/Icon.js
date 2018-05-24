@@ -79,7 +79,7 @@ export default withStyles(({ colors, text }) => {
     withHover: {
       ":nth-child(1) svg": {
         ":hover": {
-          color: "#77E9FF", //should move this to withHover
+          color: "#77E9FF",
           cursor: "pointer"
         }
       }
