@@ -5,13 +5,19 @@ import {
   faFilter,
   faSpinner,
   faQuestion,
-  faStar
+  faStar,
+  faMapMarkerAlt,
+  faPhone,
+  faGlobe
 } from "@fortawesome/fontawesome-free-solid";
 import {
   faStar as farStar,
-  faHeart
+  faHeart,
+  faClock
 } from "@fortawesome/fontawesome-free-regular";
 
+/**Implementation of font-awesomes react component so I can pass the icon I want and still use the same component
+ also works with reacts rerendering if I would chose to switch icon depending on state(this is not the case with "regular" font-awesome)*/
 const Icon = ({
   icon = null,
   fillColor = "black",
@@ -36,6 +42,18 @@ const Icon = ({
       break;
     case "faHeart":
       faIcon = faHeart;
+      break;
+    case "faMapMarker":
+      faIcon = faMapMarkerAlt;
+      break;
+    case "faClock":
+      faIcon = faClock;
+      break;
+    case "faPhone":
+      faIcon = faPhone;
+      break;
+    case "faGlobe":
+      faIcon = faGlobe;
       break;
     default:
       faIcon = faQuestion;
