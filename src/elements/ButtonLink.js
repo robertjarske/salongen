@@ -2,6 +2,7 @@ import React from "react";
 import { css, withStyles } from "../withStyles";
 import { Link } from "react-router-dom";
 
+//**Because I wanted a link that looks like a button */
 const ButtonLink = ({
   appearance = "primary",
   size = "medium",
@@ -46,10 +47,6 @@ export default withStyles(({ themes }) => {
     },
 
     /* Color */
-
-    success: themes.success,
-    danger: themes.danger,
-    successGradient: themes.successGradient,
-    dangerGradient: themes.dangerGradient
+    success: themes.success
   };
 })(ButtonLink);
