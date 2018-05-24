@@ -14,7 +14,7 @@ class Filter extends React.Component {
     this.state = {
       filtersShowing: false,
       values: {
-        min: "100",
+        min: "100", //Some initial values
         max: "1000"
       }
     };
@@ -33,12 +33,13 @@ class Filter extends React.Component {
   handleChange(value) {
     this.setState({
       values: {
-        min: value[0],
+        min: value[0], //Not the most beutiful solution but needed to be able to bubble the values to the parent
         max: value[1]
       }
     });
   }
 
+  //Passes the values to parent
   handleSubmit() {
     this.props.handleFiltration(this.state.values);
   }
@@ -79,7 +80,7 @@ class Filter extends React.Component {
               min={100}
               max={1000}
               onChange={value => this.handleChange(value)}
-              onAfterChange={this.handleSubmit}
+              onAfterChange={this.handleSubmit} //This is because I don't want to be sending values as soon as the user changes slider range
               defaultValue={[100, 1000]}
               allowCross={false}
             />
