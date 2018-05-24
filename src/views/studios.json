@@ -1,0 +1,36 @@
+[{
+    "id": "1",
+    "name": "Sax & Fön",
+    "reviews": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+    "address": "Rådmansgatan 46, 113 57 Stockholm",
+    "price": "350"
+  },
+  {
+    "id": "2",
+    "name": "Hårizont",
+    "reviews": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    "address": "Rådmansgatan 46, 113 57 Stockholm",
+    "price": "450"
+  },
+  {
+    "id": "3",
+    "name": "Hårhuset",
+    "reviews": ["1", "2", "3", "4", "5", "6", "7", "8"],
+    "address": "Rådmansgatan 46, 113 57 Stockholm",
+    "price": "550"
+  },
+  {
+    "id": "4",
+    "name": "Hair & Nu",
+    "reviews": ["1", "2", "3", "4", "5", "6"],
+    "address": "Rådmansgatan 46, 113 57 Stockholm",
+    "price": "650"
+  },
+  {
+    "id": "5",
+    "name": "Hårley Davidsson",
+    "reviews": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"],
+    "address": "Rådmansgatan 46, 113 57 Stockholm",
+    "price": "750"
+  }
+]
