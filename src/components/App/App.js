@@ -1,22 +1,19 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import { AnimatedSwitch, AnimatedRoute } from "react-router-transition";
 import LandingPage from "../../views/LandingPage";
 import Studio from "../../views/Studio";
 import List from "../../views/List";
+
+/** Since I chose not to implement redux this is where
+ the selection from the list component gets set to the state so I can pass it to the studio component */
 
 class App extends React.Component {
   constructor({ styles, ...props }) {
     super(...props);
     this.styles = styles;
     this.state = {
-      selectedStudio: {
-        //remove content here later
-        id: "1",
-        name: "Sax & Fön",
-        reviews: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-        address: "Rådmansgatan 46",
-        price: "350"
-      }
+      selectedStudio: {}
     };
     this.handleChosenStudio = this.handleChosenStudio.bind(this);
   }
@@ -29,7 +26,12 @@ class App extends React.Component {
 
   render() {
     return (
-      <Switch>
+      <AnimatedSwitch
+        atEnter={{ opacity: 0 }}
+        atLeave={{ opacity: 0 }}
+        atActive={{ opacity: 1 }}
+        className="switch-wrapper"
+      >
         <Route exact path="/" component={LandingPage} />
         <Route
           exact
@@ -49,7 +51,7 @@ class App extends React.Component {
           )}
         />
         <Route path="*" component={LandingPage} />
-      </Switch>
+      </AnimatedSwitch>
     );
   }
 }
