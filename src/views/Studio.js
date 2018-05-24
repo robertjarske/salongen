@@ -1,9 +1,10 @@
 import React from "react";
 import { withStyles, css } from "../withStyles";
-import { Route, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Icon from "../elements/Icon";
 
 const Studio = ({ studio, styles, ...props }) => {
+  //Failsafe for page-reload
   if (Object.keys(studio).length === 0) {
     return <Redirect push to="/list" />;
   }
@@ -13,19 +14,11 @@ const Studio = ({ studio, styles, ...props }) => {
         <div {...css(styles.container)}>
           <i
             onClick={() => props.history.goBack()}
-            {...css(styles.arrow, styles.left)}
+            {...css(styles.arrowLeft)}
           />
           <Icon fillColor="white" size="xl" icon="faHeart" />
         </div>
-        <div
-          style={{
-            height: "40%",
-            display: "flex",
-
-            alignItems: "flex-end",
-            padding: "20px"
-          }}
-        >
+        <div {...css(styles.nameContainer)}>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <p style={{ paddingLeft: "5px" }}>{studio.name}</p>
             <div {...css(styles.starContainer)}>
@@ -41,51 +34,48 @@ const Studio = ({ studio, styles, ...props }) => {
           </div>
         </div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-          height: "70px"
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flex: "1",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100%",
-            borderBottom: "2px solid #B69F58"
-          }}
-        >
+      <div {...css(styles.tabsContainer)}>
+        <div {...css(styles.infoTab)}>
           <p>Info</p>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flex: "1",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100%"
-          }}
-        >
+        <div {...css(styles.scheduleTab)}>
           <p>Schema</p>
         </div>
       </div>
+      <div {...css(styles.divider)} />
       <div>
-        <p>{studio.address}</p>
-        <div>
-          <p>Öppet till 19.00 idag</p>
-          <i {...css(styles.arrow, styles.down)} />
+        <div {...css(styles.listCardWrapper)}>
+          <div {...css(styles.listCardContainer)}>
+            <Icon size="large" icon="faMapMarker" />
+            <p>{studio.address}</p>
+          </div>
         </div>
-        <p>08-552 555 43</p>
-        <p>salongweb.se</p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero sint
-          iusto soluta unde quos illum recusandae nesciunt id omnis, placeat
-          commodi nemo. Iste aut vero at, quaerat ut fugiat accusamus?
-        </p>
+        <div {...css(styles.listCardWrapper)}>
+          <div {...css(styles.listCardContainer)}>
+            <Icon size="large" icon="faClock" />
+            <p style={{ marginRight: "20px" }}>Öppet till 19.00 idag</p>
+            <i {...css(styles.arrowDown)} />
+          </div>
+        </div>
+        <div {...css(styles.listCardWrapper)}>
+          <div {...css(styles.listCardContainer)}>
+            <Icon size="large" icon="faClock" />
+            <p>08-552 555 43</p>
+          </div>
+        </div>
+        <div {...css(styles.listCardWrapper)}>
+          <div {...css(styles.listCardContainer)}>
+            <Icon size="large" icon="faGlobe" />
+            <p>salongweb.se</p>
+          </div>
+        </div>
+        <div style={{ height: "100px", padding: "20px" }}>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero sint
+            iusto soluta unde quos illum recusandae nesciunt id omnis, placeat
+            commodi nemo. Iste aut vero at, quaerat ut fugiat accusamus?
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -103,16 +93,69 @@ export default withStyles(() => {
       backgroundSize: "cover",
       backgroundPosition: "center center"
     },
+    nameContainer: {
+      height: "40%",
+      display: "flex",
+      alignItems: "flex-end",
+      padding: "20px"
+    },
+    tabsContainer: {
+      display: "flex",
+      justifyContent: "space-around",
+      alignItems: "center",
+      height: "70px"
+    },
+    infoTab: {
+      display: "flex",
+      flex: "1",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "100%",
+      borderBottom: "2px solid #B69F58"
+    },
+    scheduleTab: {
+      display: "flex",
+      flex: "1",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "100%"
+    },
+    divider: {
+      height: "30px",
+      width: "100%",
+      backgroundColor: "#EEEEEE"
+    },
+    listCardWrapper: {
+      padding: "10px"
+    },
+    listCardContainer: {
+      display: "flex",
+      alignItems: "center",
+      padding: "10px",
+      borderBottom: "1px solid #EEEEEE"
+    },
     header: {
       height: "90px",
       padding: "20px"
     },
-    arrow: {
+    arrowLeft: {
       border: "solid #B69F58",
       borderWidth: "0 2px 2px 0",
       padding: "10px",
       maxHeight: "10px",
-      transform: "rotate(-45deg)",
+      transform: "rotate(135deg)",
+      ":hover": {
+        border: "solid #77E9FF",
+        borderWidth: "0 2px 2px 0",
+        cursor: "pointer"
+      }
+    },
+    arrowDown: {
+      border: "solid #B69F58",
+      borderWidth: "0 2px 2px 0",
+      padding: "5px",
+      maxHeight: "5px",
+      transform: "rotate(45deg)",
       ":hover": {
         border: "solid #77E9FF",
         borderWidth: "0 2px 2px 0",
@@ -127,6 +170,9 @@ export default withStyles(() => {
       alignItems: "center",
       justifyContent: "space-between"
     },
+    down: {
+      transform: "rotate(45deg)"
+    },
     left: {
       transform: "rotate(135deg)"
     },
@@ -137,6 +183,17 @@ export default withStyles(() => {
     paragraphWithOpacity: {
       fontSize: "1rem",
       opacity: "0.5"
+    },
+    containerTest: {
+      width: "100%",
+      borderBottom: "1px solid #EEEEEE",
+      display: "flex",
+      justifyContent: "center"
+    },
+    infoContainer: {
+      display: "flex",
+      padding: "20px",
+      flex: " 1"
     }
   };
 })(Studio);
