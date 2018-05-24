@@ -1,8 +1,6 @@
 import React from "react";
 import { withStyles, css } from "../withStyles";
-import { Route, Redirect } from "react-router-dom";
-
-// import Studio from "./Studio";
+import { Redirect } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Filter from "../components/Filter/Filter";
 import Card from "../components/Card/Card";
@@ -18,7 +16,7 @@ class List extends React.Component {
     this.state = {
       filterShowing: false,
       filterValues: {
-        min: 100,
+        min: 100, //Initial values
         max: 1000
       },
       redirect: false
@@ -26,6 +24,7 @@ class List extends React.Component {
 
     this.handleFilter = this.handleFilter.bind(this);
     this.handleFiltration = this.handleFiltration.bind(this);
+    this.filterStudios = this.filterStudios.bind(this);
   }
 
   handleFilter() {
@@ -33,7 +32,7 @@ class List extends React.Component {
       filterShowing: !this.state.filterShowing
     });
   }
-
+  //Recieves data from child and sets it to state
   handleFiltration(values) {
     this.setState({
       ...this.state,
@@ -43,13 +42,27 @@ class List extends React.Component {
       }
     });
   }
-
+  //Sets state in parent and also triggers a redirect
   handleClick(e, studio) {
     this.props.handleChosenStudio(studio);
     this.setState({
       ...this.state,
       redirect: true
     });
+  }
+
+  //Just to check if the filtration results in no studios and act depending on result
+  filterStudios(data) {
+    const arr = data.filter(
+      studio =>
+        studio.price >= this.state.filterValues.min &&
+        studio.price <= this.state.filterValues.max
+    );
+
+    if (!arr.length) {
+      return false;
+    }
+    return true;
   }
 
   render() {
@@ -60,53 +73,66 @@ class List extends React.Component {
       <div>
         <Header
           handleFilter={this.handleFilter}
-          routerProps={this.props.history}
+          routerProps={this.props.history} //Needed to be able to use history.goBack()
         />
         {this.state.filterShowing ? (
           <Filter handleFiltration={this.handleFiltration} />
         ) : (
           ""
         )}
-        {mockData.map((studio, index) => {
-          return studio.price >= this.state.filterValues.min &&
-            studio.price <= this.state.filterValues.max ? (
-            <Card key={index}>
-              <div {...css(this.styles.container)}>
-                <div {...css(this.styles.infoContainer)}>
-                  <p {...css(this.styles.paragraph, this.styles.time)}>12.00</p>
-                  <div {...css(this.styles.info)}>
-                    <Heading size="5">{studio.name}</Heading>
-                    <div {...css(this.styles.starContainer)}>
-                      <Icon fillColor="gold" icon="faStar" />
-                      <Icon fillColor="gold" icon="faStar" />
-                      <Icon fillColor="gold" icon="faStar" />
-                      <Icon fillColor="gold" icon="faStar" />
-                      <Icon fillColor="gold" icon="farStar" />
-                      <p {...css(this.styles.paragraphWithOpacity)}>
-                        ({studio.reviews.length})
+        {this.filterStudios(mockData) ? (
+          mockData
+            .filter(
+              studio =>
+                studio.price >= this.state.filterValues.min &&
+                studio.price <= this.state.filterValues.max
+            )
+            .map((studio, index) => {
+              return (
+                <Card key={index}>
+                  <div {...css(this.styles.container)}>
+                    <div {...css(this.styles.infoContainer)}>
+                      <p {...css(this.styles.paragraph, this.styles.time)}>
+                        12.00
                       </p>
+                      <div {...css(this.styles.info)}>
+                        <Heading size="5">{studio.name}</Heading>
+                        <div {...css(this.styles.starContainer)}>
+                          <Icon fillColor="gold" icon="faStar" />
+                          <Icon fillColor="gold" icon="faStar" />
+                          <Icon fillColor="gold" icon="faStar" />
+                          <Icon fillColor="gold" icon="faStar" />
+                          <Icon fillColor="gold" icon="farStar" />
+                          <p {...css(this.styles.paragraphWithOpacity)}>
+                            ({studio.reviews.length})
+                          </p>
+                        </div>
+                        <p {...css(this.styles.paragraph)}>
+                          {studio.address.slice(0, 15)}
+                        </p>
+                      </div>
                     </div>
-                    <p {...css(this.styles.paragraph)}>{studio.address}</p>
+                    <div {...css(this.styles.priceContainer)}>
+                      <div {...css(this.styles.price)}>
+                        <p {...css(this.styles.paragraph)}>{studio.price}</p>
+                        <p {...css(this.styles.minParagraph)}>30 min</p>
+                      </div>
+                      <div {...css(this.styles.iconContainer)}>
+                        <i
+                          onClick={e => this.handleClick(e, studio)}
+                          {...css(this.styles.arrow, this.styles.right)}
+                        />
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div {...css(this.styles.priceContainer)}>
-                  <div {...css(this.styles.price)}>
-                    <p {...css(this.styles.paragraph)}>{studio.price}</p>
-                    <p {...css(this.styles.minParagraph)}>30 min</p>
-                  </div>
-                  <div {...css(this.styles.iconContainer)}>
-                    <i
-                      onClick={e => this.handleClick(e, studio)}
-                      {...css(this.styles.arrow, this.styles.right)}
-                    />
-                  </div>
-                </div>
-              </div>
-            </Card>
-          ) : (
-            ""
-          );
-        })}
+                </Card>
+              );
+            })
+        ) : (
+          <p {...css(this.styles.filterParagraph)}>
+            Din filtrering matchade inga resultat, försök igen!
+          </p>
+        )}
       </div>
     );
   }
@@ -127,6 +153,10 @@ export default withStyles(() => {
     },
     paragraph: {
       fontSize: "1rem"
+    },
+    filterParagraph: {
+      fontSize: "1rem",
+      padding: "20px"
     },
     time: {
       marginRight: "10px"
