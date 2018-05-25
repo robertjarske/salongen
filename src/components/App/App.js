@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { AnimatedSwitch, AnimatedRoute } from "react-router-transition";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import LandingPage from "../../views/LandingPage";
 import Studio from "../../views/Studio";
 import List from "../../views/List";
@@ -26,32 +26,35 @@ class App extends React.Component {
 
   render() {
     return (
-      <AnimatedSwitch
-        atEnter={{ opacity: 0 }}
-        atLeave={{ opacity: 0 }}
-        atActive={{ opacity: 1 }}
-        className="switch-wrapper"
-      >
-        <Route exact path="/" component={LandingPage} />
-        <Route
-          exact
-          path="/list"
-          render={routeProps => (
-            <List
-              handleChosenStudio={this.handleChosenStudio}
-              {...routeProps}
+      <TransitionGroup>
+        <CSSTransition
+          key={this.props.location.key}
+          classNames="fade"
+          timeout={300}
+        >
+          <Switch>
+            <Route exact path="/" component={LandingPage} />
+            <Route
+              exact
+              path="/list"
+              render={routeProps => (
+                <List
+                  handleChosenStudio={this.handleChosenStudio}
+                  {...routeProps}
+                />
+              )}
             />
-          )}
-        />
-        <Route
-          exact
-          path="/studio"
-          render={routeProps => (
-            <Studio studio={this.state.selectedStudio} {...routeProps} />
-          )}
-        />
-        <Route path="*" component={LandingPage} />
-      </AnimatedSwitch>
+            <Route
+              exact
+              path="/studio"
+              render={routeProps => (
+                <Studio studio={this.state.selectedStudio} {...routeProps} />
+              )}
+            />
+            <Route path="*" component={LandingPage} />
+          </Switch>
+        </CSSTransition>
+      </TransitionGroup>
     );
   }
 }

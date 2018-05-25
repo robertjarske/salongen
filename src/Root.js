@@ -6,7 +6,14 @@ import App from "./components/App/App";
 const Root = () => {
   return (
     <Router>
-      <Route path="/" component={App} />
+      <Route
+        render={({ location }) => (
+          <Route
+            path="/"
+            render={routeProps => <App location={location} {...routeProps} />}
+          />
+        )}
+      />
     </Router>
   );
 };

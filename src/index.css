@@ -36,6 +36,16 @@ h5 {
   font-weight: 500;
 }
 
+.fade-enter {
+  transform: translateX(500px);
+  z-index: 1;
+}
+
+.fade-enter.fade-enter-active {
+  transform: translateX(0);
+  transition: all 300ms ease;
+}
+
 @keyframes slideDownRange {
   0% {
     height: 0px;

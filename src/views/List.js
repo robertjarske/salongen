@@ -90,7 +90,10 @@ class List extends React.Component {
             .map((studio, index) => {
               return (
                 <Card key={index}>
-                  <div {...css(this.styles.container)}>
+                  <div
+                    {...css(this.styles.container)}
+                    onClick={e => this.handleClick(e, studio)}
+                  >
                     <div {...css(this.styles.infoContainer)}>
                       <p {...css(this.styles.paragraph, this.styles.time)}>
                         12.00
@@ -144,7 +147,8 @@ export default withStyles(() => {
       width: "100%",
       borderBottom: "1px solid #EEEEEE",
       display: "flex",
-      justifyContent: "center"
+      justifyContent: "center",
+      cursor: "pointer"
     },
     infoContainer: {
       display: "flex",
